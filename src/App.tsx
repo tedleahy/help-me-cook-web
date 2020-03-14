@@ -1,21 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios, { AxiosResponse, AxiosError } from "axios";
+import RecipeList, { Recipe } from "./RecipeList";
 
 interface ApiResponse {
   data: Recipe[];
-}
-
-interface Recipe {
-  id: number;
-  name: string;
-  ingredients: Ingredient[];
-  instructions: string[];
-}
-
-interface Ingredient {
-  name: string;
-  amount: number;
-  amount_unit: string;
 }
 
 export default function App() {
@@ -32,11 +20,9 @@ export default function App() {
   }, []);
 
   return (
-    <div>
+    <>
       <h1>All Recipes</h1>
-      {recipes.map(recipe => {
-        return <li key={recipe?.["id"]}>{recipe?.["name"]}</li>;
-      })}
-    </div>
+      <RecipeList recipes={recipes} />
+    </>
   );
 }
