@@ -2,8 +2,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import React, { useState, useEffect } from "react";
 import axios, { AxiosResponse, AxiosError } from "axios";
-import RecipeList, { Recipe } from "./RecipeList";
+import RecipeList from "./RecipeList";
 import { Container } from "react-bootstrap";
+import { Recipe } from "../common/types";
 
 interface ApiResponse {
   data: Recipe[];
