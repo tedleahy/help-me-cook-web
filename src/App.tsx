@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import axios, { AxiosResponse, AxiosError } from "axios";
 
-function App() {
+interface ApiResponse {
+  data: Recipe[];
+}
+
+interface Recipe {
+  id: number;
+  name: string;
+  ingredients: Ingredient[];
+  instructions: string[];
+}
+
+interface Ingredient {
+  name: string;
+  amount: number;
+  amount_unit: string;
+}
+
+export default function App() {
+  const [recipes, setRecipes] = useState([] as Recipe[]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/recipes")
+      .then((response: AxiosResponse<ApiResponse>) => {
+        const recipes = (response.data as unknown) as Recipe[];
+        setRecipes(recipes);
+      })
+      .catch((error: AxiosError) => console.error(error));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>All Recipes</h1>
+      {recipes.map(recipe => {
+        return <li key={recipe?.["id"]}>{recipe?.["name"]}</li>;
+      })}
     </div>
   );
 }
-
-export default App;
