@@ -22,7 +22,6 @@ export default function RecipeList(props: RecipeProps) {
   return (
     <ListGroup>
       {props.recipes.map(recipe => {
-        // return <li key={recipe?.["id"]}>{recipe?.["name"]}</li>;
         return <ListGroup.Item>{recipe?.["name"]}</ListGroup.Item>;
       })}
     </ListGroup>
