@@ -1,30 +1,42 @@
 import React, { useState } from "react";
-import { Recipe, Ingredient, TShoppingList } from "../common/types";
+import { Recipe } from "../common/types";
 import { ListGroup, Button } from "react-bootstrap";
+import { connect } from "react-redux";
+import { addIngredient, removeIngredient } from "../common/actions";
 
 interface RecipeListItemProps {
   recipe: Recipe;
-  shoppingList: TShoppingList;
-  toggleInShoppingList: (ingredients: Ingredient[], alreadyAdded: boolean) => void;
+  addIngredient: any;
+  removeIngredient: any;
 }
 
-export default function RecipeListItem(props: RecipeListItemProps) {
+function RecipeListItem(props: RecipeListItemProps) {
   const [added, setAdded] = useState(false);
-  const recipe = props.recipe;
+  const recipeAttributes = props.recipe?.attributes;
+
+  function handleOnClick() {
+    recipeAttributes?.ingredients.forEach(ingredient => {
+      if (added) {
+        props.removeIngredient(ingredient);
+      } else {
+        props.addIngredient(ingredient);
+      }
+    });
+    setAdded(!added);
+  }
 
   return (
     <ListGroup.Item className="d-flex">
-      <span className="mr-auto">{props.recipe?.attributes?.name}</span>
+      <span className="mr-auto">{recipeAttributes?.name}</span>
       <Button
         className="align-self-end"
         variant={added ? "danger" : "success"}
-        onClick={() => {
-          props.toggleInShoppingList(recipe?.attributes?.ingredients || [], added);
-          setAdded(!added);
-        }}
+        onClick={handleOnClick}
       >
         {added ? "-" : "+"}
       </Button>
     </ListGroup.Item>
   );
 }
+
+export default connect(null, { addIngredient, removeIngredient })(RecipeListItem);

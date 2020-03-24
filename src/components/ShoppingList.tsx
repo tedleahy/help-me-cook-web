@@ -1,20 +1,29 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
-import { Ingredient, TShoppingList } from "../common/types";
+import { Ingredient, TShoppingList, AppState } from "../common/types";
+import { connect } from "react-redux";
 
 interface ShoppingListProps {
-  shoppingList: Map<number, Ingredient>;
+  shoppingList?: Map<number, Ingredient>;
 }
 
-export default function ShoppingList(props: ShoppingListProps) {
+function ShoppingList(props: ShoppingListProps) {
   return (
     <ListGroup>
-      {Array.from(props.shoppingList).map(([id, ingredient]) => {
-        return <ListGroup.Item key={id}>{showIngredient(ingredient)}</ListGroup.Item>;
-      })}
+      {props.shoppingList
+        ? Array.from(props.shoppingList).map(([id, ingredient]) => {
+            return <ListGroup.Item key={id}>{showIngredient(ingredient)}</ListGroup.Item>;
+          })
+        : []}
     </ListGroup>
   );
 }
+
+const shoppingListStore = (appState: AppState) => ({
+  shoppingList: appState.shoppingList
+});
+
+export default connect(shoppingListStore, null)(ShoppingList);
 
 function showIngredient({ name, amount, amount_unit }: Ingredient): string {
   switch (amount_unit) {
@@ -45,13 +54,7 @@ export function addIngredientToShoppingList(
   const existingIngredient = shoppingList.get(id);
   if (existingIngredient) {
     const currentAmount = existingIngredient.amount;
-    const newIngredient = {
-      id,
-      name,
-      amount: currentAmount + amount,
-      amount_unit
-    };
-    shoppingList.set(id, newIngredient);
+    shoppingList.set(id, { id, name, amount: currentAmount + amount, amount_unit });
   } else {
     shoppingList.set(id, { id, name, amount, amount_unit });
   }

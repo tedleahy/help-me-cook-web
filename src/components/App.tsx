@@ -4,11 +4,8 @@ import React, { useState, useEffect } from "react";
 import axios, { AxiosResponse, AxiosError } from "axios";
 import RecipeList from "./RecipeList";
 import { Container, Row, Col } from "react-bootstrap";
-import { Recipe, Ingredient, TShoppingList } from "../common/types";
-import ShoppingList, {
-  addIngredientToShoppingList,
-  removeIngredientFromShoppingList
-} from "./ShoppingList";
+import { Recipe } from "../common/types";
+import ShoppingList from "./ShoppingList";
 
 interface ApiResponse {
   data: Recipe[];
@@ -16,7 +13,6 @@ interface ApiResponse {
 
 export default function App() {
   const [recipes, setRecipes] = useState([] as Recipe[]);
-  const [shoppingList, setShoppingList] = useState(new Map<number, Ingredient>());
 
   useEffect(() => {
     axios
@@ -28,31 +24,16 @@ export default function App() {
       .catch((error: AxiosError) => console.error(error));
   }, []);
 
-  const toggleInShoppingList = (ingredients: Ingredient[], alreadyAdded: boolean): void => {
-    const reducer = (accumulator: TShoppingList, currIngredient: Ingredient): TShoppingList => {
-      accumulator = alreadyAdded
-        ? removeIngredientFromShoppingList(accumulator, currIngredient)
-        : addIngredientToShoppingList(accumulator, currIngredient);
-      return accumulator;
-    };
-    //
-    setShoppingList(ingredients.reduce(reducer, new Map(shoppingList)));
-  };
-
   return (
     <Container>
       <Row className="my-4">
         <Col>
           <h1 className="text-center">All Recipes</h1>
-          <RecipeList
-            recipes={recipes}
-            shoppingList={shoppingList}
-            toggleInShoppingList={toggleInShoppingList}
-          />
+          <RecipeList recipes={recipes} />
         </Col>
         <Col>
           <h1 className="text-center">Shopping List</h1>
-          <ShoppingList shoppingList={shoppingList} />
+          <ShoppingList />
         </Col>
       </Row>
     </Container>

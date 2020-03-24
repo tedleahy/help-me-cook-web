@@ -16,3 +16,7 @@ export interface Ingredient {
 }
 
 export type TShoppingList = Map<number, Ingredient>;
+
+export interface AppState {
+  shoppingList: TShoppingList;
+}
