@@ -1,7 +1,7 @@
 import React from "react";
 import { RouteComponentProps } from "@reach/router";
 import { Container, Row, Col } from "react-bootstrap";
-import SearchIngredients from "./SearchIngredients";
+import SearchIngredients from "./SearchIngredientsList";
 import PossibleRecipes from "./PossibleRecipes";
 
 export default function SearchRecipesByIngredients(props: RouteComponentProps) {

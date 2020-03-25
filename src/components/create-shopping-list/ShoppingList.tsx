@@ -51,28 +51,32 @@ export function addIngredientToShoppingList(
   shoppingList: TShoppingList,
   { id, name, amount, amount_unit }: Ingredient
 ): TShoppingList {
-  const existingIngredient = shoppingList.get(id);
+  const newShoppingList = new Map(shoppingList);
+  const existingIngredient = newShoppingList.get(id);
+
   if (existingIngredient) {
     const currentAmount = existingIngredient.amount;
-    shoppingList.set(id, { id, name, amount: currentAmount + amount, amount_unit });
+    newShoppingList.set(id, { id, name, amount: currentAmount + amount, amount_unit });
   } else {
-    shoppingList.set(id, { id, name, amount, amount_unit });
+    newShoppingList.set(id, { id, name, amount, amount_unit });
   }
-  return shoppingList;
+  return newShoppingList;
 }
 
 export function removeIngredientFromShoppingList(
   shoppingList: TShoppingList,
   { id, name, amount, amount_unit }: Ingredient
 ): TShoppingList {
-  const existingIngredient = shoppingList.get(id);
+  const newShoppingList = new Map(shoppingList);
+  const existingIngredient = newShoppingList.get(id);
+
   if (existingIngredient) {
     const newAmount = existingIngredient.amount - amount;
     if (newAmount <= 0) {
-      shoppingList.delete(id);
+      newShoppingList.delete(id);
     } else {
-      shoppingList.set(id, { id, name, amount: newAmount, amount_unit });
+      newShoppingList.set(id, { id, name, amount: newAmount, amount_unit });
     }
   }
-  return shoppingList;
+  return newShoppingList;
 }

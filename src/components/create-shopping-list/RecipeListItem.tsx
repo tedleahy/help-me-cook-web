@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Recipe } from "../../common/types";
 import { ListGroup, Button } from "react-bootstrap";
 import { connect } from "react-redux";
-import { addIngredient, removeIngredient } from "../../common/actions";
+import { addToShoppingList, removeFromShoppingList } from "../../common/actions";
 
 interface RecipeListItemProps {
   recipe: Recipe;
-  addIngredient: any;
-  removeIngredient: any;
+  addToShoppingList: any;
+  removeFromShoppingList: any;
 }
 
 function RecipeListItem(props: RecipeListItemProps) {
@@ -17,9 +17,9 @@ function RecipeListItem(props: RecipeListItemProps) {
   function handleOnClick() {
     recipeAttributes?.ingredients.forEach(ingredient => {
       if (added) {
-        props.removeIngredient(ingredient);
+        props.removeFromShoppingList(ingredient);
       } else {
-        props.addIngredient(ingredient);
+        props.addToShoppingList(ingredient);
       }
     });
     setAdded(!added);
@@ -39,4 +39,4 @@ function RecipeListItem(props: RecipeListItemProps) {
   );
 }
 
-export default connect(null, { addIngredient, removeIngredient })(RecipeListItem);
+export default connect(null, { addToShoppingList, removeFromShoppingList })(RecipeListItem);

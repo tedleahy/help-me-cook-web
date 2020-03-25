@@ -17,6 +17,9 @@ export interface Ingredient {
 
 export type TShoppingList = Map<number, Ingredient>;
 
+export type TSearchIngredients = string[];
+
 export interface AppState {
   shoppingList: TShoppingList;
+  searchIngredients: string[];
 }
