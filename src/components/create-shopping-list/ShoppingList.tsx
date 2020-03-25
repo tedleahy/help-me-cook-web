@@ -1,6 +1,6 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
-import { Ingredient, TShoppingList, AppState } from "../common/types";
+import { Ingredient, TShoppingList, AppState } from "../../common/types";
 import { connect } from "react-redux";
 
 interface ShoppingListProps {

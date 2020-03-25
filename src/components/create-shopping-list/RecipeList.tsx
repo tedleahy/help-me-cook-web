@@ -1,7 +1,7 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
 import RecipeListItem from "./RecipeListItem";
-import { Recipe } from "../common/types";
+import { Recipe } from "../../common/types";
 
 interface RecipeListProps {
   recipes: Recipe[];

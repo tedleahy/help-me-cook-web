@@ -3,7 +3,7 @@ import { ShoppingListAction, ADD_INGREDIENT, REMOVE_INGREDIENT } from "./actions
 import {
   addIngredientToShoppingList,
   removeIngredientFromShoppingList
-} from "../components/ShoppingList";
+} from "../components/create-shopping-list/ShoppingList";
 
 export const initialState: AppState = {
   shoppingList: new Map<number, Ingredient>()
