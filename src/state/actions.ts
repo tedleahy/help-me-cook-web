@@ -1,4 +1,4 @@
-import { Ingredient } from "./types";
+import { Ingredient } from "../common/types";
 
 export type StateAction = ShoppingListAction | SearchIngredientsAction;
 

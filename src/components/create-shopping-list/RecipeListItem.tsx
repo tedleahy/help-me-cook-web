@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Recipe } from "../../common/types";
 import { ListGroup, Button } from "react-bootstrap";
 import { connect } from "react-redux";
-import { addToShoppingList, removeFromShoppingList } from "../../common/actions";
+import { addToShoppingList, removeFromShoppingList } from "../../state/actions";
 
 interface RecipeListItemProps {
   recipe: Recipe;

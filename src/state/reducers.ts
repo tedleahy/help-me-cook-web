@@ -1,4 +1,4 @@
-import { AppState, Ingredient, TShoppingList, TSearchIngredients } from "./types";
+import { AppState, Ingredient, TShoppingList, TSearchIngredients } from "../common/types";
 import {
   ADD_TO_SHOPPING_LIST,
   REMOVE_FROM_SHOPPING_LIST,
@@ -10,18 +10,17 @@ import {
   addIngredientToShoppingList,
   removeIngredientFromShoppingList
 } from "../components/create-shopping-list/ShoppingList";
+import { combineReducers } from "redux";
 
 export const initialState: AppState = {
   shoppingList: new Map<number, Ingredient>(),
   searchIngredients: []
 };
 
-export function appState(state = initialState, action: StateAction): AppState {
-  return {
-    shoppingList: shoppingList(state.shoppingList, action),
-    searchIngredients: searchIngredients(state.searchIngredients, action)
-  };
-}
+export const appState = combineReducers({
+  shoppingList,
+  searchIngredients
+});
 
 function shoppingList(list = new Map<number, Ingredient>(), action: StateAction): TShoppingList {
   const newShoppingList = new Map(list);

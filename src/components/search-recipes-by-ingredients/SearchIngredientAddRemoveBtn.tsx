@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import { addToSearchIngredients, removeFromSearchIngredients } from "../../common/actions";
+import { addToSearchIngredients, removeFromSearchIngredients } from "../../state/actions";
 import { connect } from "react-redux";
 
 interface SearchIngredientAddRemoveBtnProps {
