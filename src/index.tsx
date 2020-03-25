@@ -6,6 +6,7 @@ import App from "./components/App";
 import { appState, initialState } from "./state/reducers";
 
 const store = createStore(appState, initialState);
+store.subscribe(() => console.log(store.getState()));
 
 ReactDOM.render(
   <Provider store={store}>

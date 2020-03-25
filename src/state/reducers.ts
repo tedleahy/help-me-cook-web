@@ -42,7 +42,7 @@ function searchIngredients(
 ): TSearchIngredients {
   switch (action.type) {
     case ADD_TO_SEARCH_INGREDIENTS:
-      return action.ingredientName == "" ? ingredients : [...ingredients, action.ingredientName];
+      return action.ingredientName === "" ? ingredients : [...ingredients, action.ingredientName];
     case REMOVE_FROM_SEARCH_INGREDIENTS:
       return ingredients.filter(ingredient => ingredient !== action.ingredientName);
 
