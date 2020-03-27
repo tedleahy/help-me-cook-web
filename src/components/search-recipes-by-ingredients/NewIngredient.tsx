@@ -23,6 +23,7 @@ function NewIngredient(props: NewIngredientProps) {
       />
       <AddIngredientBtn
         ingredientName={ingredientName}
+        setIngredientName={setIngredientName}
         addToSearchIngredients={props.addToSearchIngredients}
       />
     </Form.Group>
@@ -30,8 +31,9 @@ function NewIngredient(props: NewIngredientProps) {
 }
 
 interface AddIngredientBtnProps {
-  addToSearchIngredients: (ingredientName: string) => SearchIngredientsAction;
   ingredientName: string;
+  setIngredientName: React.Dispatch<React.SetStateAction<string>>;
+  addToSearchIngredients: (ingredientName: string) => SearchIngredientsAction;
 }
 
 function AddIngredientBtn(props: AddIngredientBtnProps) {
@@ -40,7 +42,10 @@ function AddIngredientBtn(props: AddIngredientBtnProps) {
       style={{ fontSize: "x-large", width: "2em" }}
       className="ml-1 py-0"
       variant="success"
-      onClick={() => addToSearchIngredients(props.ingredientName)}
+      onClick={() => {
+        props.addToSearchIngredients(props.ingredientName);
+        props.setIngredientName("");
+      }}
     >
       +
     </Button>
