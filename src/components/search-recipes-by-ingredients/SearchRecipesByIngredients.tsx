@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { RouteComponentProps } from "@reach/router";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import PossibleRecipes from "./PossibleRecipes";
 import NewIngredient from "./NewIngredient";
 import AddedIngredient from "./AddedIngredient";
+import { AppState } from "../../common/types";
+import { connect } from "react-redux";
+import { addToSearchIngredients, SearchIngredientsAction } from "../../state/actions";
 
-export default function SearchRecipesByIngredients(props: RouteComponentProps) {
-  const [searchIngredients, setSearchIngredients] = useState([] as string[]);
+interface SearchRecipesByIngredientsProps extends RouteComponentProps {
+  searchIngredients?: string[];
+  addToSearchIngredients: (ingredientName: string) => SearchIngredientsAction;
+}
 
+function SearchRecipesByIngredients(props: SearchRecipesByIngredientsProps) {
   return (
     <Container>
       <Row className="mt-4">
@@ -26,9 +32,11 @@ export default function SearchRecipesByIngredients(props: RouteComponentProps) {
       <Row>
         <Col>
           <Form>
-            {searchIngredients.map(ingredientName => {
-              return <AddedIngredient ingredientName={ingredientName} />;
-            })}
+            {props.searchIngredients
+              ? props.searchIngredients.map((ingredientName, index) => (
+                  <AddedIngredient key={index} ingredientName={ingredientName} />
+                ))
+              : []}
             <NewIngredient />
           </Form>
         </Col>
@@ -39,3 +47,11 @@ export default function SearchRecipesByIngredients(props: RouteComponentProps) {
     </Container>
   );
 }
+
+const searchIngredientsStore = (appState: AppState) => ({
+  searchIngredients: appState.searchIngredients
+});
+
+export default connect(searchIngredientsStore, { addToSearchIngredients })(
+  SearchRecipesByIngredients
+);
