@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { RouteComponentProps } from "@reach/router";
-import { Container, Row, Col } from "react-bootstrap";
-import SearchIngredients from "./SearchIngredientsList";
+import { Container, Row, Col, Form } from "react-bootstrap";
 import PossibleRecipes from "./PossibleRecipes";
+import NewIngredient from "./NewIngredient";
+import AddedIngredient from "./AddedIngredient";
 
 export default function SearchRecipesByIngredients(props: RouteComponentProps) {
+  const [searchIngredients, setSearchIngredients] = useState([] as string[]);
+
   return (
     <Container>
       <Row className="mt-4">
@@ -22,7 +25,12 @@ export default function SearchRecipesByIngredients(props: RouteComponentProps) {
       </Row>
       <Row>
         <Col>
-          <SearchIngredients />
+          <Form>
+            {searchIngredients.map(ingredientName => {
+              return <AddedIngredient ingredientName={ingredientName} />;
+            })}
+            <NewIngredient />
+          </Form>
         </Col>
         <Col className="d-flex justify-content-center">
           <PossibleRecipes />
