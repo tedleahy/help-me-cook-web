@@ -38,6 +38,7 @@ function RemoveIngredientBtn(props: RemoveIngredientBtnProps) {
       style={{ fontSize: "x-large", width: "2em" }}
       className={buttonStyleClasses}
       variant="danger"
+      onClick={() => props.removeFromSearchIngredients(props.ingredientName)}
     >
       -
     </Button>
