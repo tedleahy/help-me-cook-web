@@ -10,9 +10,9 @@ interface RecipeListProps {
 export default function RecipeList(props: RecipeListProps) {
   return (
     <ListGroup>
-      {props.recipes.map(recipe => {
-        return <RecipeListItem key={recipe.id} recipe={recipe} />;
-      })}
+      {props.recipes.map(recipe => (
+        <RecipeListItem key={recipe.id} recipe={recipe} />
+      ))}
     </ListGroup>
   );
 }
