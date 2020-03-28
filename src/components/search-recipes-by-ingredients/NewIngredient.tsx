@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { AddRemoveSearchIngredientAction, addSearchIngredient } from "../../state/actions";
 import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 interface NewIngredientProps {
   addSearchIngredient: (ingredientName: string) => AddRemoveSearchIngredientAction;
@@ -47,7 +49,7 @@ function AddIngredientBtn(props: AddIngredientBtnProps) {
         props.setIngredientName("");
       }}
     >
-      +
+      <FontAwesomeIcon icon={faPlus} />
     </Button>
   );
 }
