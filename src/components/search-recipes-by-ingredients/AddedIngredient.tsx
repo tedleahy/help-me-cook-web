@@ -1,48 +1,54 @@
-import React from "react";
-import { SearchIngredientsAction, removeFromSearchIngredients } from "../../state/actions";
+import React, { useState } from "react";
+import {
+  AddRemoveSearchIngredientAction,
+  removeSearchIngredient,
+  UpdateSearchIngredientAction,
+  updateSearchIngredient
+} from "../../state/actions";
 import { connect } from "react-redux";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import {
+  UpdateIngredientBtn,
+  EditIngredientBtn,
+  RemoveIngredientBtn
+} from "./AddedIngredientButtons";
 
 interface AddedIngredientProps {
-  removeFromSearchIngredients: (ingredientName: string) => SearchIngredientsAction;
+  removeSearchIngredient: (ingredientName: string) => AddRemoveSearchIngredientAction;
+  updateSearchIngredient: (
+    oldIngredientName: string,
+    newIngredientName: string
+  ) => UpdateSearchIngredientAction;
   ingredientName: string;
 }
 
 function AddedIngredient(props: AddedIngredientProps) {
+  const originalName = props.ingredientName;
+  const [editing, setEditing] = useState(false);
+
   return (
     <Form.Group className="d-flex">
-      <Form.Control disabled type="text" size="lg" value={props.ingredientName} />
-      <EditIngredientBtn />
-      <RemoveIngredientBtn
-        removeFromSearchIngredients={props.removeFromSearchIngredients}
-        ingredientName={props.ingredientName}
+      <Form.Control
+        disabled={!editing}
+        type="text"
+        size="lg"
+        value={props.ingredientName}
+        onChange={(e: React.FormEvent<HTMLInputElement>) =>
+          props.updateSearchIngredient(originalName, e.currentTarget.value)
+        }
       />
+      {editing ? (
+        <UpdateIngredientBtn setEditing={setEditing} />
+      ) : (
+        <>
+          <EditIngredientBtn setEditing={setEditing} />
+          <RemoveIngredientBtn
+            removeSearchIngredient={() => props.removeSearchIngredient(props.ingredientName)}
+          />
+        </>
+      )}
     </Form.Group>
   );
 }
 
-const buttonStyleClasses = "ml-1 py-0";
-
-function EditIngredientBtn() {
-  return <Button className={buttonStyleClasses}>Edit</Button>;
-}
-
-interface RemoveIngredientBtnProps {
-  removeFromSearchIngredients: (ingredientName: string) => SearchIngredientsAction;
-  ingredientName: string;
-}
-
-function RemoveIngredientBtn(props: RemoveIngredientBtnProps) {
-  return (
-    <Button
-      style={{ fontSize: "x-large", width: "2em" }}
-      className={buttonStyleClasses}
-      variant="danger"
-      onClick={() => props.removeFromSearchIngredients(props.ingredientName)}
-    >
-      -
-    </Button>
-  );
-}
-
-export default connect(null, { removeFromSearchIngredients })(AddedIngredient);
+export default connect(null, { removeSearchIngredient, updateSearchIngredient })(AddedIngredient);

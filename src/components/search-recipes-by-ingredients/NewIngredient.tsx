@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { SearchIngredientsAction, addToSearchIngredients } from "../../state/actions";
+import { AddRemoveSearchIngredientAction, addSearchIngredient } from "../../state/actions";
 import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 
 interface NewIngredientProps {
-  addToSearchIngredients: (ingredientName: string) => SearchIngredientsAction;
+  addSearchIngredient: (ingredientName: string) => AddRemoveSearchIngredientAction;
 }
 
 function NewIngredient(props: NewIngredientProps) {
@@ -24,7 +24,7 @@ function NewIngredient(props: NewIngredientProps) {
       <AddIngredientBtn
         ingredientName={ingredientName}
         setIngredientName={setIngredientName}
-        addToSearchIngredients={props.addToSearchIngredients}
+        addSearchIngredient={props.addSearchIngredient}
       />
     </Form.Group>
   );
@@ -33,7 +33,7 @@ function NewIngredient(props: NewIngredientProps) {
 interface AddIngredientBtnProps {
   ingredientName: string;
   setIngredientName: React.Dispatch<React.SetStateAction<string>>;
-  addToSearchIngredients: (ingredientName: string) => SearchIngredientsAction;
+  addSearchIngredient: (ingredientName: string) => AddRemoveSearchIngredientAction;
 }
 
 function AddIngredientBtn(props: AddIngredientBtnProps) {
@@ -43,7 +43,7 @@ function AddIngredientBtn(props: AddIngredientBtnProps) {
       className="ml-1 py-0"
       variant="success"
       onClick={() => {
-        props.addToSearchIngredients(props.ingredientName);
+        props.addSearchIngredient(props.ingredientName);
         props.setIngredientName("");
       }}
     >
@@ -52,4 +52,4 @@ function AddIngredientBtn(props: AddIngredientBtnProps) {
   );
 }
 
-export default connect(null, { addToSearchIngredients })(NewIngredient);
+export default connect(null, { addSearchIngredient })(NewIngredient);

@@ -6,11 +6,11 @@ import NewIngredient from "./NewIngredient";
 import AddedIngredient from "./AddedIngredient";
 import { AppState } from "../../common/types";
 import { connect } from "react-redux";
-import { addToSearchIngredients, SearchIngredientsAction } from "../../state/actions";
+import { addSearchIngredient, AddRemoveSearchIngredientAction } from "../../state/actions";
 
 interface SearchRecipesByIngredientsProps extends RouteComponentProps {
   searchIngredients?: string[];
-  addToSearchIngredients: (ingredientName: string) => SearchIngredientsAction;
+  addSearchIngredient: (ingredientName: string) => AddRemoveSearchIngredientAction;
 }
 
 function SearchRecipesByIngredients(props: SearchRecipesByIngredientsProps) {
@@ -52,6 +52,4 @@ const searchIngredientsStore = (appState: AppState) => ({
   searchIngredients: appState.searchIngredients
 });
 
-export default connect(searchIngredientsStore, { addToSearchIngredients })(
-  SearchRecipesByIngredients
-);
+export default connect(searchIngredientsStore, { addSearchIngredient })(SearchRecipesByIngredients);

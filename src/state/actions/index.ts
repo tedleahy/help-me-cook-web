@@ -1,8 +1,14 @@
 import { Ingredient } from "../../common/types";
 
-export interface SearchIngredientsAction {
-  type: "ADD_TO_SEARCH_INGREDIENTS" | "REMOVE_FROM_SEARCH_INGREDIENTS";
+export interface AddRemoveSearchIngredientAction {
+  type: "ADD_SEARCH_INGREDIENT" | "REMOVE_SEARCH_INGREDIENT";
   ingredientName: string;
+}
+
+export interface UpdateSearchIngredientAction {
+  type: "UPDATE_SEARCH_INGREDIENT";
+  oldIngredientName: string;
+  newIngredientName: string;
 }
 
 export interface ShoppingListAction {
@@ -10,13 +16,18 @@ export interface ShoppingListAction {
   ingredient: Ingredient;
 }
 
-export type StateAction = ShoppingListAction | SearchIngredientsAction;
+export type StateAction =
+  | ShoppingListAction
+  | AddRemoveSearchIngredientAction
+  | UpdateSearchIngredientAction;
 
 export {
-  ADD_TO_SEARCH_INGREDIENTS,
-  REMOVE_FROM_SEARCH_INGREDIENTS,
-  addToSearchIngredients,
-  removeFromSearchIngredients
+  ADD_SEARCH_INGREDIENT,
+  REMOVE_SEARCH_INGREDIENT,
+  UPDATE_SEARCH_INGREDIENT,
+  addSearchIngredient,
+  removeSearchIngredient,
+  updateSearchIngredient
 } from "./searchIngredientsActions";
 
 export {

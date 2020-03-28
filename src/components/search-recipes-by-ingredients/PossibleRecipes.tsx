@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 
 export default function PossibleRecipes() {
   return (
-    <Button style={{ height: "200%" }}>
+    <Button style={{ height: "100%" }}>
       <b>Get Possible Recipes</b>
     </Button>
   );
