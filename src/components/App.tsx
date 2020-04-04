@@ -9,18 +9,20 @@ import { Navbar, Nav } from "react-bootstrap";
 export default function App() {
   return (
     <>
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="light" expand="sm">
         <Navbar.Brand href="/">HelpMeCook</Navbar.Brand>
-        <Nav>
-          <Nav.Link href="/search-recipes-by-ingredients">Search Recipes</Nav.Link>
-          <Nav.Link href="/create-shopping-list">Create Shopping List</Nav.Link>
-        </Nav>
+        <Navbar.Toggle aria-controls="nav-links" />
+        <Navbar.Collapse id="nav-links">
+          <Nav>
+            <Nav.Link href="/search-recipes-by-ingredients">Search Recipes</Nav.Link>
+            <Nav.Link href="/create-shopping-list">Create Shopping List</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
 
       <Router>
         <SearchRecipesByIngredients path="/search-recipes-by-ingredients" />
         <CreateShoppingList path="/create-shopping-list" />
-        {/* <SearchRecipesByIngredients path="/search-recipes-by-ingredients" /> */}
       </Router>
     </>
   );
