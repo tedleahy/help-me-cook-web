@@ -4,7 +4,7 @@ import React from "react";
 import { Router } from "@reach/router";
 import CreateShoppingList from "./create-shopping-list/CreateShoppingList";
 import SearchRecipesByIngredients from "./search-recipes-by-ingredients/SearchRecipesByIngredients";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, Container } from "react-bootstrap";
 
 export default function App() {
   return (
@@ -20,10 +20,13 @@ export default function App() {
         </Navbar.Collapse>
       </Navbar>
 
-      <Router>
-        <SearchRecipesByIngredients path="/search-recipes-by-ingredients" />
-        <CreateShoppingList path="/create-shopping-list" />
-      </Router>
+      <Container>
+        <Router>
+          <AllRecipes path="/recipes" />
+          <SearchRecipesByIngredients path="/search-recipes-by-ingredients" />
+          <CreateShoppingList path="/create-shopping-list" />
+        </Router>
+      </Container>
     </>
   );
 }

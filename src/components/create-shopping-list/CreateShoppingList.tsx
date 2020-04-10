@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios, { AxiosResponse, AxiosError } from "axios";
 import RecipeList from "./RecipeList";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { Recipe } from "../../common/types";
 import ShoppingList from "./ShoppingList";
 import { RouteComponentProps } from "@reach/router";
@@ -24,17 +24,15 @@ export default function CreateShoppingList(props: RouteComponentProps) {
   }, []);
 
   return (
-    <Container>
-      <Row className="my-4">
-        <Col>
-          <h1 className="text-center">All Recipes</h1>
-          <RecipeList recipes={recipes} />
-        </Col>
-        <Col>
-          <h1 className="text-center">Shopping List</h1>
-          <ShoppingList />
-        </Col>
-      </Row>
-    </Container>
+    <Row className="my-4">
+      <Col>
+        <h1 className="text-center">All Recipes</h1>
+        <RecipeList recipes={recipes} />
+      </Col>
+      <Col>
+        <h1 className="text-center">Shopping List</h1>
+        <ShoppingList />
+      </Col>
+    </Row>
   );
 }

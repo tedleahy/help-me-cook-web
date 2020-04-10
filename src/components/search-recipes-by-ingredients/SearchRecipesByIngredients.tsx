@@ -1,6 +1,6 @@
 import React from "react";
 import { RouteComponentProps } from "@reach/router";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Row, Col, Form } from "react-bootstrap";
 import PossibleRecipes from "./PossibleRecipes";
 import NewIngredient from "./NewIngredient";
 import AddedIngredient from "./AddedIngredient";
@@ -15,7 +15,7 @@ interface SearchRecipesByIngredientsProps extends RouteComponentProps {
 
 function SearchRecipesByIngredients(props: SearchRecipesByIngredientsProps) {
   return (
-    <Container>
+    <>
       <Row className="mt-4">
         <Col>
           <h1>What Meals Can I Make?</h1>
@@ -44,7 +44,7 @@ function SearchRecipesByIngredients(props: SearchRecipesByIngredientsProps) {
           <PossibleRecipes />
         </Col>
       </Row>
-    </Container>
+    </>
   );
 }
 
