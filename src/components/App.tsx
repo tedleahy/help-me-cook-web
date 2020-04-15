@@ -17,11 +17,12 @@ export default function App() {
         </Nav>
       </Navbar>
 
-      <Router>
-        <SearchRecipesByIngredients path="/search-recipes-by-ingredients" />
-        <CreateShoppingList path="/create-shopping-list" />
-        {/* <SearchRecipesByIngredients path="/search-recipes-by-ingredients" /> */}
-      </Router>
+      <div className="p-3">
+        <Router>
+          <SearchRecipesByIngredients path="/search-recipes-by-ingredients" />
+          <CreateShoppingList path="/create-shopping-list" />
+        </Router>
+      </div>
     </>
   );
 }

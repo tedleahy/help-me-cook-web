@@ -16,7 +16,7 @@ interface SearchRecipesByIngredientsProps extends RouteComponentProps {
 function SearchRecipesByIngredients(props: SearchRecipesByIngredientsProps) {
   return (
     <Container>
-      <Row className="mt-4">
+      <Row>
         <Col>
           <h1>What Meals Can I Make?</h1>
         </Col>

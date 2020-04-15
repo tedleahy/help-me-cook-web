@@ -25,7 +25,7 @@ export default function CreateShoppingList(props: RouteComponentProps) {
 
   return (
     <Container>
-      <Row className="my-4">
+      <Row>
         <Col>
           <h1 className="text-center">All Recipes</h1>
           <RecipeList recipes={recipes} />
