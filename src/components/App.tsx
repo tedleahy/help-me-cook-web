@@ -6,6 +6,7 @@ import CreateShoppingList from "./create-shopping-list/CreateShoppingList";
 import SearchRecipesByIngredients from "./search-recipes-by-ingredients/SearchRecipesByIngredients";
 import { Navbar, Nav } from "react-bootstrap";
 import AllRecipes from "./recipes/AllRecipes";
+import NewRecipe from "./recipes/NewRecipe";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
           <SearchRecipesByIngredients path="/search-recipes-by-ingredients" />
           <CreateShoppingList path="/create-shopping-list" />
           <AllRecipes path="/recipes" />
+          <NewRecipe path="/recipes/new" />
         </Router>
       </div>
     </>
