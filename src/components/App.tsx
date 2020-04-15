@@ -5,6 +5,7 @@ import { Router } from "@reach/router";
 import CreateShoppingList from "./create-shopping-list/CreateShoppingList";
 import SearchRecipesByIngredients from "./search-recipes-by-ingredients/SearchRecipesByIngredients";
 import { Navbar, Nav } from "react-bootstrap";
+import AllRecipes from "./recipes/AllRecipes";
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
       <Navbar bg="light" expand="lg">
         <Navbar.Brand href="/">HelpMeCook</Navbar.Brand>
         <Nav>
+          <Nav.Link href="/recipes">All Recipes</Nav.Link>
           <Nav.Link href="/search-recipes-by-ingredients">Search Recipes</Nav.Link>
           <Nav.Link href="/create-shopping-list">Create Shopping List</Nav.Link>
         </Nav>
@@ -21,6 +23,7 @@ export default function App() {
         <Router>
           <SearchRecipesByIngredients path="/search-recipes-by-ingredients" />
           <CreateShoppingList path="/create-shopping-list" />
+          <AllRecipes path="/recipes" />
         </Router>
       </div>
     </>
