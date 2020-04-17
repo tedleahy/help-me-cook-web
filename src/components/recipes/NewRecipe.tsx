@@ -1,6 +1,8 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { RouteComponentProps } from "@reach/router";
 import { Row, Col, Form, Button } from "react-bootstrap";
+import { Ingredient, AmountUnit } from "../../common/types";
 
 export default function NewRecipe(props: RouteComponentProps) {
   const [name, setName] = useState("");
@@ -27,14 +29,17 @@ export default function NewRecipe(props: RouteComponentProps) {
               variant="success"
               size="lg"
               block
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              onClick={() => {
                 const recipe = {
                   name: name,
-                  imageUrl: imageUrl,
-                  ingredients: ingredients.split("\n"),
+                  image_url: imageUrl,
+                  ingredients: ingredients.split("\n").map(parseIngredient),
                   instructions: instructions.split("\n")
                 };
-                console.log(recipe);
+                axios
+                  .post("http://localhost:5000/recipes/create", recipe)
+                  .then(response => console.log(response))
+                  .catch(err => console.error(err));
               }}
             >
               Add Recipe
@@ -62,4 +67,15 @@ function textInput(size: InputSize, name: string, stateVar: string, setState: an
       />
     </Form.Group>
   );
+}
+
+function parseIngredient(ingredientLine: string): Ingredient {
+  let [, amount, amountUnit, name] = ingredientLine.match(/^(\d*)\s*(ml|g|tsp|tbsp)?\s*(.*)$/);
+  if (amount && !amountUnit) amountUnit = "whole";
+
+  return {
+    name: name,
+    amount: parseFloat(amount) || undefined,
+    amount_unit: (amountUnit as unknown) as AmountUnit
+  };
 }
