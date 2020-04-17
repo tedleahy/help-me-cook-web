@@ -9,11 +9,13 @@ export interface Recipe {
 }
 
 export interface Ingredient {
-  id: number;
+  id?: number;
   name: string;
-  amount: number;
-  amount_unit: "ml" | "g" | "tsp" | "tbsp" | "whole";
+  amount?: number;
+  amount_unit?: AmountUnit;
 }
+
+export type AmountUnit = "ml" | "g" | "tsp" | "tbsp" | "whole";
 
 export type TShoppingList = Map<number, Ingredient>;
 

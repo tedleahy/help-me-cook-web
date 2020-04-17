@@ -26,6 +26,8 @@ const shoppingListStore = (appState: AppState) => ({
 export default connect(shoppingListStore, null)(ShoppingList);
 
 function showIngredient({ name, amount, amount_unit }: Ingredient): string {
+  if (!amount || !amount_unit) return name;
+
   switch (amount_unit) {
     case "ml":
       if (amount > 1000) {
@@ -40,8 +42,6 @@ function showIngredient({ name, amount, amount_unit }: Ingredient): string {
       return `${amount} ${amount_unit} of ${name}`;
     case "whole":
       return `${amount} ${name}`;
-    case null:
-      return name;
     default:
       return `Error displaying ingredient: ${name}, ${amount}, ${amount_unit}`;
   }
@@ -49,14 +49,16 @@ function showIngredient({ name, amount, amount_unit }: Ingredient): string {
 
 export function addIngredientToShoppingList(
   shoppingList: TShoppingList,
-  { id, name, amount, amount_unit }: Ingredient
+  { id, name, amount = 0, amount_unit }: Ingredient
 ): TShoppingList {
+  if (!id) return shoppingList;
+
   const newShoppingList = new Map(shoppingList);
   const existingIngredient = newShoppingList.get(id);
 
   if (existingIngredient) {
-    const currentAmount = existingIngredient.amount;
-    newShoppingList.set(id, { id, name, amount: currentAmount + amount, amount_unit });
+    const newAmount = (existingIngredient.amount || 0) + amount;
+    newShoppingList.set(id, { id, name, amount: newAmount, amount_unit });
   } else {
     newShoppingList.set(id, { id, name, amount, amount_unit });
   }
@@ -65,13 +67,15 @@ export function addIngredientToShoppingList(
 
 export function removeIngredientFromShoppingList(
   shoppingList: TShoppingList,
-  { id, name, amount, amount_unit }: Ingredient
+  { id, name, amount = 0, amount_unit }: Ingredient
 ): TShoppingList {
+  if (!id) return shoppingList;
+
   const newShoppingList = new Map(shoppingList);
   const existingIngredient = newShoppingList.get(id);
 
   if (existingIngredient) {
-    const newAmount = existingIngredient.amount - amount;
+    const newAmount = (existingIngredient.amount || 0) - amount;
     if (newAmount <= 0) {
       newShoppingList.delete(id);
     } else {
