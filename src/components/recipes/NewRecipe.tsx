@@ -44,9 +44,9 @@ export default function NewRecipe(props: RouteComponentProps) {
                   name,
                   image_url: imageUrl,
                   servings,
-                  prepTimeMins,
-                  cookTimeMins,
-                  totalTimeMins,
+                  prep_time_mins: prepTimeMins,
+                  cook_time_mins: cookTimeMins,
+                  total_time_mins: totalTimeMins,
                   ingredients: ingredients.split(/\n+/).map(parseIngredient),
                   instructions: instructions.split(/\n+/)
                 };
