@@ -42,6 +42,7 @@ export default function NewRecipe(props: RouteComponentProps) {
               onClick={() => {
                 const recipe = {
                   name,
+                  source_url: sourceUrl,
                   image_url: imageUrl,
                   servings,
                   prep_time_mins: prepTimeMins,
