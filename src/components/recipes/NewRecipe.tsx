@@ -47,8 +47,8 @@ export default function NewRecipe(props: RouteComponentProps) {
                   prepTimeMins,
                   cookTimeMins,
                   totalTimeMins,
-                  ingredients: ingredients.split("\n").map(parseIngredient),
-                  instructions: instructions.split("\n")
+                  ingredients: ingredients.split(/\n+/).map(parseIngredient),
+                  instructions: instructions.split(/\n+/)
                 };
                 axios
                   .post("http://localhost:5000/recipes/create", recipe)
