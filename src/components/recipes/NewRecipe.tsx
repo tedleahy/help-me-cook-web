@@ -6,7 +6,12 @@ import { Ingredient, AmountUnit } from "../../common/types";
 
 export default function NewRecipe(props: RouteComponentProps) {
   const [name, setName] = useState("");
+  const [sourceUrl, setSourceUrl] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [servings, setServings] = useState(0);
+  const [prepTimeMins, setPrepTimeMins] = useState(0);
+  const [cookTimeMins, setCookTimeMins] = useState(0);
+  const [totalTimeMins, setTotalTimeMins] = useState(0);
   const [ingredients, setIngredients] = useState("");
   const [instructions, setInstructions] = useState("");
 
@@ -20,10 +25,15 @@ export default function NewRecipe(props: RouteComponentProps) {
       <Row>
         <Col>
           <Form>
-            {textInput("small", "Name", name, setName)}
-            {textInput("small", "Image URL", imageUrl, setImageUrl)}
-            {textInput("big", "Ingredients", ingredients, setIngredients)}
-            {textInput("big", "Instructions", instructions, setInstructions)}
+            {buildInput("small", "text", "Name", name, setName)}
+            {buildInput("small", "text", "Source URL", sourceUrl, setSourceUrl)}
+            {buildInput("small", "text", "Image URL", imageUrl, setImageUrl)}
+            {buildInput("small", "number", "Servings", servings, setServings)}
+            {buildInput("small", "number", "Prep time (mins)", prepTimeMins, setPrepTimeMins)}
+            {buildInput("small", "number", "Cook time (mins)", cookTimeMins, setCookTimeMins)}
+            {buildInput("small", "number", "Total time (mins)", totalTimeMins, setTotalTimeMins)}
+            {buildInput("big", "text", "Ingredients", ingredients, setIngredients)}
+            {buildInput("big", "text", "Instructions", instructions, setInstructions)}
 
             <Button
               variant="success"
@@ -31,11 +41,16 @@ export default function NewRecipe(props: RouteComponentProps) {
               block
               onClick={() => {
                 const recipe = {
-                  name: name,
+                  name,
                   image_url: imageUrl,
+                  servings,
+                  prepTimeMins,
+                  cookTimeMins,
+                  totalTimeMins,
                   ingredients: ingredients.split("\n").map(parseIngredient),
                   instructions: instructions.split("\n")
                 };
+                console.log(recipe);
                 axios
                   .post("http://localhost:5000/recipes/create", recipe)
                   .then(response => console.log(response))
@@ -53,12 +68,12 @@ export default function NewRecipe(props: RouteComponentProps) {
 
 type InputSize = "big" | "small";
 
-function textInput(size: InputSize, name: string, stateVar: string, setState: any) {
+function buildInput(size: InputSize, type: string, name: string, stateVar: any, setState: any) {
   return (
     <Form.Group>
       <Form.Label>{name}</Form.Label>
       <Form.Control
-        type="text"
+        type={type}
         as={size === "big" ? "textarea" : "input"}
         rows="7"
         placeholder={name}
