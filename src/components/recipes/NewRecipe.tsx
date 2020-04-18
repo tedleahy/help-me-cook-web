@@ -50,7 +50,6 @@ export default function NewRecipe(props: RouteComponentProps) {
                   ingredients: ingredients.split("\n").map(parseIngredient),
                   instructions: instructions.split("\n")
                 };
-                console.log(recipe);
                 axios
                   .post("http://localhost:5000/recipes/create", recipe)
                   .then(response => console.log(response))
