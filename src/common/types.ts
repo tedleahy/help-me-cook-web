@@ -1,11 +1,18 @@
 export interface Recipe {
   id: number;
-  attributes: {
-    name: string;
-    imageUrl: string;
-    ingredients: Ingredient[];
-    instructions: string[];
-  };
+  attributes: RecipeAttributes;
+}
+
+export interface RecipeAttributes {
+  name: string;
+  image_url?: string;
+  servings?: number;
+  source_url?: string;
+  prep_time_mins?: number;
+  cook_time_mins?: number;
+  total_time_mins?: number;
+  ingredients: Ingredient[];
+  instructions: string[];
 }
 
 export interface Ingredient {

@@ -25,7 +25,7 @@ const shoppingListStore = (appState: AppState) => ({
 
 export default connect(shoppingListStore, null)(ShoppingList);
 
-function showIngredient({ name, amount, amount_unit }: Ingredient): string {
+export function showIngredient({ name, amount, amount_unit }: Ingredient): string {
   if (!amount || !amount_unit) return name;
 
   switch (amount_unit) {
