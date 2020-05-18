@@ -49,7 +49,7 @@ function showIngredient({ name, amount, amount_unit }: Ingredient): string {
 
 export function addIngredientToShoppingList(
   shoppingList: TShoppingList,
-  { id, name, amount, amount_unit }: Ingredient
+  { id = -1, name, amount, amount_unit }: Ingredient
 ): TShoppingList {
   const newShoppingList = new Map(shoppingList);
   const existingIngredient = newShoppingList.get(id);
@@ -65,7 +65,7 @@ export function addIngredientToShoppingList(
 
 export function removeIngredientFromShoppingList(
   shoppingList: TShoppingList,
-  { id, name, amount, amount_unit }: Ingredient
+  { id = -1, name, amount, amount_unit }: Ingredient
 ): TShoppingList {
   const newShoppingList = new Map(shoppingList);
   const existingIngredient = newShoppingList.get(id);

@@ -2,10 +2,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import React from "react";
 import { Router } from "@reach/router";
-import AllRecipes from "./all-recipes/AllRecipes";
+import AllRecipes from "./recipes/AllRecipes";
 import CreateShoppingList from "./create-shopping-list/CreateShoppingList";
 import SearchRecipesByIngredients from "./search-recipes-by-ingredients/SearchRecipesByIngredients";
 import { Navbar, Nav, Container } from "react-bootstrap";
+import NewRecipe from "./recipes/NewRecipe";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
       <Container>
         <Router>
           <AllRecipes path="/recipes" />
+          <NewRecipe path="/recipes/new" />
           <SearchRecipesByIngredients path="/search-recipes-by-ingredients" />
           <CreateShoppingList path="/create-shopping-list" />
         </Router>

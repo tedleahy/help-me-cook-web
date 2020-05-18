@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { RouteComponentProps, Link } from "@reach/router";
-import { Row, CardGroup, Card, Col } from "react-bootstrap";
+import { Row, CardGroup, Card, Col, Button } from "react-bootstrap";
 import { Recipe } from "../../common/types";
 import axios, { AxiosResponse, AxiosError } from "axios";
 
@@ -20,7 +20,16 @@ export default function AllRecipes(props: RouteComponentProps) {
   return (
     <>
       <Row className="my-4">
-        <h1>All Recipes</h1>
+        <Col>
+          <h1>All Recipes</h1>
+        </Col>
+        <Col className="text-right">
+          <Link to="new">
+            <Button variant="success" size="lg">
+              + Add new Recipe
+            </Button>
+          </Link>
+        </Col>
       </Row>
       <Row>
         {recipes.length ? (
